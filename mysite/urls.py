@@ -20,7 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('menu.urls')),
+    url(r'', include('menu.urls', namespace='menu')),
 ]
 
 # Setting up urlpatterns for django-debug-toolbar(version==1.9.1)
