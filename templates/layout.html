@@ -1,9 +1,13 @@
-<!DOCtype html>
+{% load static %}
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>{% block title %}Soda Fountain{% endblock %}</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/my_css.css' %}">
     </head>
     <body>
         <div class="page-header">
