@@ -21,7 +21,6 @@ def menu_list(request):
 
 def menu_detail(request, pk):
     menu = Menu.objects.get(pk=pk)
-    # This is a comment
     return render(request, 'menu/menu_detail.html', {'menu': menu})
 
 
