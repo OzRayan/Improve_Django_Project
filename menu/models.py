@@ -13,7 +13,7 @@ class Menu(models.Model):
 
 
 class Item(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=255)
     description = models.TextField()
     chef = models.ForeignKey('auth.User')
     created_date = models.DateTimeField(default=timezone.now)

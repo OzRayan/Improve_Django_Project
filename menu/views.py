@@ -9,13 +9,15 @@ from .forms import *
 
 
 def menu_list(request):
-    all_menus = Menu.objects.all()
-    menus = []
-    for menu in all_menus:
-        if menu.expiration_date == timezone.now():
-            menus.append(menu)
+    # all_menus = Menu.objects.all()
+    # menus = []
+    # for menu in all_menus:
+    #     if menu.expiration_date == timezone.now():
+    #         menus.append(menu)
+    #
+    # menus = sorted(menus, key=attrgetter('expiration_date'))
+    menus = Menu.objects.all().prefetch_related('items')
 
-    menus = sorted(menus, key=attrgetter('expiration_date'))
     return render(request, 'menu/list_all_current_menus.html', {'menus': menus})
 
 
