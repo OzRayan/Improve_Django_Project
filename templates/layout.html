@@ -13,14 +13,18 @@
         <link rel="stylesheet" href="{% static 'css/my_css.css' %}">
     </head>
     <body>
+
         <div class="page-header text-center">
             <h1>
             {% if user.is_authenticated %}
-                <a href="{% url 'menu:menu_new' %}" class="h3"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'menu:menu_new' %}" class="h3 text-left">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
             {% endif %}
-            <a href="/">Soda Fountain</a>
+            <a href="/" class="text-right">Soda Fountain</a>
             </h1>
         </div>
+
         <div class="content container">
             {% block content %}{% endblock %}
         </div>

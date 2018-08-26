@@ -16,7 +16,6 @@ def menu_list(request):
             if menu.expiration_date >= timezone.now():
                 menus.append(menu)
 
-
     menus = sorted(menus, key=attrgetter('expiration_date'))
     # menus = Menu.objects.all().prefetch_related('items')
 
