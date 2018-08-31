@@ -17,11 +17,11 @@
                     {% endfor %}
                 </select>
                 <br />
-                <label for="expiration_date">Expiration Date:</label>
+                <label for="expiration_date">Expiration Date(mm/dd/yyyy):</label>
                 <input id="expiration_date" type="text" name="expiration_date"
                        value="{{ menu.expiration_date|date:'m/d/Y' }}">
                 <br />
-                <input type="submit" value="Submit" />
+                <button type="submit" class="save btn btn-default">Save</button>
             </form>
         </div>
     </div>
