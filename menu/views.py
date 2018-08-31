@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
-from django.utils import timezone
 from operator import attrgetter
 from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,17 +8,19 @@ from .forms import *
 
 
 def menu_list(request):
-    all_menus = Menu.objects.all()
+    all_menus = Menu.objects.all().prefetch_related('items')
+    menus_no_expdate = []
     menus = []
     for menu in all_menus:
         if menu.expiration_date:
             if menu.expiration_date >= timezone.now():
                 menus.append(menu)
-
+        else:
+            menus_no_expdate.append(menu)
     menus = sorted(menus, key=attrgetter('expiration_date'))
-    # menus = Menu.objects.all().prefetch_related('items')
-
-    return render(request, 'menu/list_all_current_menus.html', {'menus': menus})
+    menus_no_expdate = sorted(menus_no_expdate, key=attrgetter('season'))
+    return render(request, 'menu/list_all_current_menus.html',
+                  {'menus': menus, 'no_date': menus_no_expdate})
 
 
 def menu_detail(request, pk):
@@ -36,16 +37,13 @@ def item_detail(request, pk):
 
 
 def create_new_menu(request):
+    form = MenuForm()
     if request.method == "POST":
         form = MenuForm(request.POST)
         if form.is_valid():
-            menu = form.save(commit=False)
-            menu.created_date = timezone.now()
-            menu.save()
+            menu = form.save()
             return redirect('menu:menu_detail', pk=menu.pk)
-    else:
-        form = MenuForm()
-    return render(request, 'menu/menu_edit.html', {'form': form})
+    return render(request, 'menu/add_menu.html', {'form': form})
 
 
 def edit_menu(request, pk):

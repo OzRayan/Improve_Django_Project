@@ -4,20 +4,35 @@
     <div class="row">
         <div class="col-md-8">
             <div class="post">
-                {% if menu.expiration_date %}
-                     <div class="date">
-                         Expires on: {{ menu.expiration_date }}
-                     </div>
-                {% endif %}
+
 
                 {% for menu in menus %}
+                    {% if menu.expiration_date %}
+                        <div class="date h4">
+                            Expires on: {{ menu.expiration_date }}
+                        </div>
+                    {% endif %}
                     <h1>
                         {% if user.is_authenticated %}
-                            <a class="btn btn-default" href="{% url 'menu:menu_edit' pk=menu.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-default" href="{% url 'menu:menu_edit' pk=menu.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span></a>
                         {% endif %}
                         <a href="{% url 'menu:menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
                     </h1>
-                    <p>{{ menu.items.all|join:", "}}</p>
+                    <p class="h5 text-success">{{ menu.items.all|join:", "}}</p>
+                {% endfor %}
+
+                <h1 class="display-5">Without expiration date</h1>
+
+                {% for menu in no_date %}
+                    <h1>
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-default" href="{% url 'menu:menu_edit' pk=menu.pk %}">
+                                <span class="glyphicon glyphicon-pencil"></span></a>
+                        {% endif %}
+                        <a href="{% url 'menu:menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
+                    </h1>
+                    <p class="h5 text-success">{{ menu.items.all|join:", "}}</p>
                 {% endfor %}
             </div>
         </div>
