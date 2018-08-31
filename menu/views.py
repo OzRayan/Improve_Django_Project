@@ -42,7 +42,7 @@ def create_new_menu(request):
             menu = form.save(commit=False)
             menu.created_date = timezone.now()
             menu.save()
-            return redirect('menu_detail', pk=menu.pk)
+            return redirect('menu:menu_detail', pk=menu.pk)
     else:
         form = MenuForm()
     return render(request, 'menu/menu_edit.html', {'form': form})
