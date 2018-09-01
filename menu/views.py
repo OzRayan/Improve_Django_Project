@@ -48,14 +48,20 @@ def create_new_menu(request):
 
 def edit_menu(request, pk):
     menu = get_object_or_404(Menu, pk=pk)
-    items = Item.objects.all()
     form = MenuForm(instance=menu)
-
     if request.method == "POST":
         form = MenuForm(request.POST, instance=menu)
         if form.is_valid():
             menu = form.save()
             return redirect('menu:menu_detail', pk=menu.pk)
-    return render(request, 'menu/add_menu.html', {
-        'form': form,
-        })
+    return render(request, 'menu/add_menu.html', {'form': form})
+
+
+def delete_menu(request, pk):
+    menu = get_object_or_404(Menu, pk=pk)
+    if request.method == 'POST':
+        menu.delete()
+        return redirect('menu_list')
+    return render(
+        request, 'menu/menu_delete.html', {'menu': menu}
+    )

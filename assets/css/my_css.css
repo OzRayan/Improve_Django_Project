@@ -1,0 +1,13 @@
+body {
+    background-image: url('../images/Scroll_2.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+
+.page-header {
+    border-bottom: 0;
+}

@@ -11,4 +11,5 @@ urlpatterns = [
         views.item_detail, name='item_detail'),
     url(r'^menu/new/$',
         views.create_new_menu, name='menu_new'),
+    url(r'^menu/delete/(?P<pk>\d+)/$', views.delete_menu, name='menu_delete'),
 ]

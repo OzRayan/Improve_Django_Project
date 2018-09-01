@@ -1,4 +1,4 @@
-{% load static %}
+{% load static from staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,6 @@
             <a href="/" class="text-right">Soda Fountain</a>
             </h1>
         </div>
-
         <div class="content container">
             {% block content %}{% endblock %}
         </div>

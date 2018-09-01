@@ -20,9 +20,9 @@ class MenuForm(ModelForm):
             if expiration_date <= timezone.now():
                 raise ValidationError('Expiration date already passed!!')
         if items:
-            if len(items) <= 3:
-                raise ValidationError("You must select four or more items!")
+            if len(items) < 1:
+                raise ValidationError("You must one or more items!")
         else:
-            raise ValidationError('You must select four or more items!')
+            raise ValidationError('You must one or more items!')
 
         return cleaned_data
