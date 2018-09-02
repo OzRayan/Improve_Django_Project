@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Title Block --->
         <title>{% block title %}Soda Fountain{% endblock %}</title>
+
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
@@ -13,7 +15,7 @@
         <link rel="stylesheet" href="{% static 'css/my_css.css' %}">
     </head>
     <body>
-
+        <!-- Header --->
         <div class="page-header text-center">
             <h1>
             {% if user.is_authenticated %}
@@ -24,8 +26,12 @@
             <a href="/" class="text-right">Soda Fountain</a>
             </h1>
         </div>
+        <!-- /Header --->
+
+        <!-- Content --->
         <div class="content container">
             {% block content %}{% endblock %}
         </div>
+        <!-- /Content --->
     </body>
 </html>
