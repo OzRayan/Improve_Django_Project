@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
-{% block title %}New Menu | {{ block.super }}{% endblock %}
+{% block title %}{% if key %}Edit {{ form.season.value }}{% else %}New Menu{% endif %} | {{ block.super }}{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-8">
             <!-- TO DO: Add or change menu Title and head --->
-            <h1>Add menu</h1>
+            <h1>{% if key %}Edit{% else %}Add New{% endif %} Menu</h1>
             <form method="POST" class="menu-form">
                 {% csrf_token %}
                 {{ form.as_p }}

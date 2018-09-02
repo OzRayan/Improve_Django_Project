@@ -21,8 +21,27 @@ class MenuForm(ModelForm):
                 raise ValidationError('Expiration date already passed!!')
         if items:
             if len(items) < 1:
-                raise ValidationError("You must one or more items!")
+                raise ValidationError("You must select one or more items!")
         else:
-            raise ValidationError('You must one or more items!')
+            raise ValidationError('You must select one or more items!')
+
+        return cleaned_data
+
+
+class ItemForm(ModelForm):
+
+    class Meta:
+        model = Item
+        exclude = ('created_date',)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        description = cleaned_data.get('description')
+        ingredients = cleaned_data.get('ingredients')
+        if not description or len(description) < 10:
+            raise ValidationError('Description must contain at least 10 characters!')
+        if ingredients:
+            if len(ingredients) < 2:
+                raise ValidationError('You must select two or more ingredients!')
 
         return cleaned_data

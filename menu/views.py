@@ -37,15 +37,6 @@ def menu_detail(request, pk):
     return render(request, 'menu/menu_detail.html', {'menu': menu})
 
 
-def item_detail(request, pk):
-    """Item detail view - get item object 'pk'
-    :input: - pk - item id
-    :return: - detail_item.html + dictionary of item values
-    """
-    item = get_object_or_404(Item, pk=pk)
-    return render(request, 'menu/detail_item.html', {'item': item})
-
-
 def create_new_menu(request):
     """Create new menu view
     :return: - add_menu.html + form for new menu
@@ -71,14 +62,53 @@ def edit_menu(request, pk):
         if form.is_valid():
             menu = form.save()
             return redirect('menu:menu_detail', pk=menu.pk)
-    return render(request, 'menu/add_menu.html', {'form': form})
+    return render(request, 'menu/add_menu.html', {'form': form, 'key': True})
 
 
 def delete_menu(request, pk):
-    menu = get_object_or_404(Menu, pk=pk)
+    menu_d = get_object_or_404(Menu, pk=pk)
     if request.method == 'POST':
-        menu.delete()
-        return redirect('menu_list')
+        menu_d.delete()
+        return redirect('menu:menu_list')
     return render(
-        request, 'menu/menu_delete.html', {'menu': menu}
+        request, 'menu/delete_menu.html', {'menu': menu_d}
     )
+
+
+def item_list(request):
+    """Item list view, selects all the item objects
+    :return: - item_list.html + item list dictionary
+    """
+    # noinspection PyUnresolvedReferences
+    items = Item.objects.all()
+    # Sorts items by alphabet
+    items = sorted(items, key=attrgetter('name'))
+
+    return render(request, 'menu/item_list.html', {'items': items})
+
+
+def item_detail(request, pk):
+    """Item detail view - get item object 'pk'
+    :input: - pk - item id
+    :return: - detail_item.html + dictionary of item values
+    """
+    item = get_object_or_404(Item, pk=pk)
+    return render(request, 'menu/detail_item.html', {'item': item})
+
+
+def edit_item(request, pk):
+    """Edit item view - get item object by 'pk'
+    :input: - pk - item id
+    :return: - item_edit.html + form for item
+    """
+    item = get_object_or_404(Item, pk=pk)
+    form = ItemForm(instance=item)
+    if request.method == "POST":
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            menu = form.save()
+            return redirect('menu:item_detail', pk=menu.pk)
+    return render(request, 'menu/edit_item.html', {'form': form})
+
+
+

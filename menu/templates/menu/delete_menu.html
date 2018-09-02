@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="post">
+
+                <h2>On the menu this season:</h2>
+                <ul>
+                    {% for item in menu.items.all %}
+                        <li><a href="{% url 'menu:item_detail' pk=item.pk %}">{{ item }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% if menu.expiration_date %}
+                    <div class="date">
+                        Menu expires on {{ menu.expiration_date|date:"F j, Y" }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <form action="{% url 'menu:menu_delete' pk=menu.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete Menu">
+    </form>
+{% endblock %}

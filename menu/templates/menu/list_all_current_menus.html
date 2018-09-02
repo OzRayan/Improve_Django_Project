@@ -18,6 +18,9 @@
                                href="{% url 'menu:menu_edit' pk=menu.pk %}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
+                            <a class="btn btn-default" href="{% url 'menu:menu_delete' pk=menu.pk %}">
+                                Delete
+                            </a>
                         {% endif %}
                         <a href="{% url 'menu:menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
                     </h1>
@@ -33,7 +36,11 @@
                                href="{% url 'menu:menu_edit' pk=menu.pk %}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
+                            <a class="btn btn-default" href="{% url 'menu:menu_delete' pk=menu.pk %}">
+                                Delete
+                            </a>
                         {% endif %}
+
                         <a href="{% url 'menu:menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
                     </h1>
                     <p class="h5 text-success">{{ menu.items.all|join:", " }}</p>
