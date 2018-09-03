@@ -1,14 +1,15 @@
 {% extends "layout.html" %}
 
-{% block title %}Edit | {{ menu.season }} | {{ block.super }}{% endblock %}
+{% block title %}Edit | {{ form.season.value }} | {{ block.super }}{% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h1>Change menu</h1>
-            <form action="" method="POST">{% csrf_token %}
+            <form action="" method="POST">
+                {% csrf_token %}
                 <label for="season">Season:</label>
-                <input id="season" type="text" name="season" value="{{ menu.season }}">
+                <input id="season" type="text" name="season" value="{{ form.season.value }}">
                 <br />
                 <label for="items">Items:</label>
                 <select multiple>
@@ -19,9 +20,9 @@
                 <br />
                 <label for="expiration_date">Expiration Date(mm/dd/yyyy):</label>
                 <input id="expiration_date" type="text" name="expiration_date"
-                       value="{{ menu.expiration_date|date:'m/d/Y' }}">
+                       value="{{ form.expiration_date.value|date:'m/d/Y' }}">
                 <br />
-                <button type="submit" class="save btn btn-default">Save</button>
+                <button type="submit" class="save btn btn-outline-info">Save</button>
             </form>
         </div>
     </div>

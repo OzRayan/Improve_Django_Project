@@ -11,3 +11,19 @@ body {
 .page-header {
     border-bottom: 0;
 }
+
+/* BUTTONS */
+.btn {
+    font-size: 1.4em;
+    border-radius: 18%;
+}
+
+.in input, .in select {
+    background-color: transparent;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+.in select:checked {
+    background-color: green!important;
+}

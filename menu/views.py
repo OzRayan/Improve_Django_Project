@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from operator import attrgetter
+import datetime
 
 from .models import Menu, Item, timezone
 from .forms import *
@@ -16,7 +17,7 @@ def menu_list(request):
     menus = []
     for menu in all_menus:
         if menu.expiration_date:
-            if menu.expiration_date >= timezone.now():
+            if menu.expiration_date > datetime.date.today():
                 menus.append(menu)
         else:
             menus_no_expdate.append(menu)

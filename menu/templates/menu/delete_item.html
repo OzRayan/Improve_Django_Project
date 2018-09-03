@@ -18,6 +18,6 @@
     </div>
     <form action="{% url 'menu:item_delete' pk=item.pk %}" method="post">
         {% csrf_token %}
-        <input type="submit" value="Delete Item">
+        <input type="submit" value="Delete Item" class="btn btn-outline-danger">
     </form>
 {% endblock %}

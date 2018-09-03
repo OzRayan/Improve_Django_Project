@@ -1,59 +1,70 @@
 {% extends "layout.html" %}
 
 {% block option %}
-<a href="{% url 'menu:menu_new' %}" class="h3 text-left">
-    <!--<span class="glyphicon glyphicon-plus"></span>-->
-    Add New Menu
-</a>
-<a href="{% url 'menu:item_list' %}">Items</a>
+<div class="mr-5 pr-5">
+    <a href="{% url 'menu:menu_new' %}" class="display-5 mr-5 pr-5">
+        Add Menu
+    </a>
+    <a href="{% url 'menu:item_list' %}" class="display-4 mr-5 pr-5">Items</a>
+</div>
 {% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="post">
 
                 <!-- Menu List WITH expiration date --->
                 {% for menu in menus %}
-                    {% if menu.expiration_date %}
-                        <div class="date h4">
-                            Expires on: {{ menu.expiration_date }}
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <a href="{% url 'menu:menu_detail' pk=menu.pk %}" class="display-4">{{ menu.season }}</a>
+                            <p class="h3 pl-4">{{ menu.items.all|join:", " }}</p>
+                            {% if menu.expiration_date %}
+                                <div class="date h3 pl-4">
+                                    <strong class="text-secondary">Expires on:</strong> {{ menu.expiration_date }}
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
-                    <h1>
-                        {% if user.is_authenticated %}
-                            <a class="btn btn-default"
-                               href="{% url 'menu:menu_edit' pk=menu.pk %}">
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                Edit
-                            </a>
-                            <a class="btn btn-default" href="{% url 'menu:menu_delete' pk=menu.pk %}">
-                                Delete
-                            </a>
-                        {% endif %}
-                        <a href="{% url 'menu:menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
-                    </h1>
-                    <p class="h5 text-success">{{ menu.items.all|join:", " }}</p>
+
+                        <div class="">
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-outline-success mr-1"
+                                   href="{% url 'menu:menu_edit' pk=menu.pk %}">
+                                    Edit
+                                </a>
+                                <a class="btn btn-outline-danger ml-1" href="{% url 'menu:menu_delete' pk=menu.pk %}">
+                                    Delete
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% endfor %}
+                    </div>
 
                 <!-- Menu List WITHOUT expiration date --->
-                <h1 class="display-5">Without expiration date</h1>
+                <h1 class="display-4">Without expiration date</h1>
                 {% for menu in no_date %}
-                    <h1>
-                        {% if user.is_authenticated %}
-                            <a class="btn btn-default"
-                               href="{% url 'menu:menu_edit' pk=menu.pk %}">
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                Edit
-                            </a>
-                            <a class="btn btn-default" href="{% url 'menu:menu_delete' pk=menu.pk %}">
-                                Delete
-                            </a>
-                        {% endif %}
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <h1>
+                                <a href="{% url 'menu:menu_detail' pk=menu.pk %}" class="display-4">{{ menu.season }}</a>
+                            </h1>
+                            <p class="h3 pl-4">{{ menu.items.all|join:", " }}</p>
+                        </div>
 
-                        <a href="{% url 'menu:menu_detail' pk=menu.pk %}">{{ menu.season }}</a>
-                    </h1>
-                    <p class="h5 text-success">{{ menu.items.all|join:", " }}</p>
+                        <div class="">
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-outline-success mr-1"
+                                   href="{% url 'menu:menu_edit' pk=menu.pk %}">
+                                    Edit
+                                </a>
+                                <a class="btn btn-outline-danger ml-1" href="{% url 'menu:menu_delete' pk=menu.pk %}">
+                                    Delete
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% endfor %}
 
             </div>

@@ -1,6 +1,7 @@
 from django.forms import ModelForm, ValidationError
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils import timezone
+import datetime
 
 from .models import Menu, Item, Ingredient
 
@@ -17,7 +18,7 @@ class MenuForm(ModelForm):
         expiration_date = cleaned_data.get('expiration_date')
 
         if expiration_date:
-            if expiration_date <= timezone.now():
+            if expiration_date < datetime.date.today():
                 raise ValidationError('Expiration date already passed!!')
         if items:
             if len(items) < 1:

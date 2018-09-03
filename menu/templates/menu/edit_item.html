@@ -9,10 +9,10 @@
         <div class="col-md-8">
             <!-- TO DO: Add or change menu Title and head --->
             <h1>{% if key %}Edit{% else %}Add New{% endif %} Item</h1>
-            <form method="POST" class="menu-form">
+            <form method="POST" class="menu-form in">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="save btn btn-default">Save</button>
+                <button type="submit" class="save btn btn-outline-info">Save</button>
             </form>
         </div>
     </div>
