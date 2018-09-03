@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 
+{% block option %}
+<a href="{% url 'menu:menu_new' %}" class="h3 text-left">
+    <!--<span class="glyphicon glyphicon-plus"></span>-->
+    Add New Menu
+</a>
+<a href="{% url 'menu:item_list' %}">Items</a>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-8">
@@ -16,7 +24,8 @@
                         {% if user.is_authenticated %}
                             <a class="btn btn-default"
                                href="{% url 'menu:menu_edit' pk=menu.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span>
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                Edit
                             </a>
                             <a class="btn btn-default" href="{% url 'menu:menu_delete' pk=menu.pk %}">
                                 Delete
@@ -34,7 +43,8 @@
                         {% if user.is_authenticated %}
                             <a class="btn btn-default"
                                href="{% url 'menu:menu_edit' pk=menu.pk %}">
-                                <span class="glyphicon glyphicon-pencil"></span>
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                Edit
                             </a>
                             <a class="btn btn-default" href="{% url 'menu:menu_delete' pk=menu.pk %}">
                                 Delete

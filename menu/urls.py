@@ -6,8 +6,10 @@ urlpatterns = [
     url(r'^menu/new/$', views.create_new_menu, name='menu_new'),
     url(r'^menu/(?P<pk>\d+)/$', views.menu_detail, name='menu_detail'),
     url(r'^menu/(?P<pk>\d+)/edit/$', views.edit_menu, name='menu_edit'),
+    url(r'^menu/(?P<pk>\d+)/delete/$', views.delete_menu, name='menu_delete'),
     url(r'^menu/items/$', views.item_list, name='item_list'),
+    url(r'^menu/item/new/$', views.create_new_item, name='item_new'),
     url(r'^menu/item/(?P<pk>\d+)/$', views.item_detail, name='item_detail'),
     url(r'^menu/item/(?P<pk>\d+)/edit/$', views.edit_item, name='item_edit'),
-    url(r'^menu/(?P<pk>\d+)/delete/$', views.delete_menu, name='menu_delete'),
+    url(r'^menu/item/(?P<pk>\d+)/delete/$', views.delete_item, name='item_delete'),
 ]

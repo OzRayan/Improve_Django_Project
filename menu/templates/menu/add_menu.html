@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 
-{% block title %}{% if key %}Edit {{ form.season.value }}{% else %}New Menu{% endif %} | {{ block.super }}{% endblock %}
+{% block title %}
+    {% if key %}Edit {{ form.season.value }}{% else %}New Menu{% endif %} | {{ block.super }}
+{% endblock %}
 
 {% block content %}
     <div class="row">

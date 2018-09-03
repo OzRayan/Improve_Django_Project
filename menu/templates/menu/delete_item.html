@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete Item | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="post">
+                <h1>{{ item.name }}</h1>
+                <p><strong>Head Chef:</strong> {{ item.chef }}</p>
+                <p>{{ item.description|linebreaks }}</p>
+                <p><strong>Ingredients: </strong>{{ item.ingredients.all|join:", " }}</p>
+                {% if item.standard %}
+                    <p><em>This item is available year-round.</em></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <form action="{% url 'menu:item_delete' pk=item.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete Item">
+    </form>
+{% endblock %}

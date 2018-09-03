@@ -1,10 +1,12 @@
 {% extends "layout.html" %}
 
+{% block title %}Delete Menu | {{ block.super }}{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-8">
             <div class="post">
-
+                <h1>{{ menu.season }}</h1>
                 <h2>On the menu this season:</h2>
                 <ul>
                     {% for item in menu.items.all %}
