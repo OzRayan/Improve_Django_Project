@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ValidationError
+from django.forms import DateField, ModelForm, ValidationError
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils import timezone
 import datetime
@@ -7,6 +7,10 @@ from .models import Menu, Item, Ingredient
 
 
 class MenuForm(ModelForm):
+    # cur_year = datetime.datetime.today().year
+    # year_range = tuple([i for i in range(cur_year, cur_year + 2)])
+    # expiration_date = DateField(widget=SelectDateWidget(years=year_range),
+    #                             initial=None)
 
     class Meta:
         model = Menu
