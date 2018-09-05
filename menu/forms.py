@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ValidationError
+from django.forms import DateField, ModelForm, ValidationError
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils import timezone
 import datetime
