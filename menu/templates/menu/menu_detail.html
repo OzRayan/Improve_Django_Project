@@ -4,28 +4,40 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="post">
-                <h1>
-                    {% if user.is_authenticated %}
-                        <a class="btn btn-default" href="{% url 'menu:menu_edit' pk=menu.pk %}">
-                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                            Edit
-                        </a>
-                    {% endif %}
-                    {{ menu.season }}
-                </h1>
-                <h2>On the menu this season:</h2>
-                <ul>
-                    {% for item in menu.items.all %}
-                        <li><a href="{% url 'menu:item_detail' pk=item.pk %}">{{ item }}</a></li>
-                    {% endfor %}
-                </ul>
-                {% if menu.expiration_date %}
-                    <div class="date">
-                        Menu expires on {{ menu.expiration_date|date:"F j, Y" }}
+
+                <div class="d-flex justify-content-between">
+                    <div class="">
+                        <h1 class="display-4 text-success">
+                            {{ menu.season }}
+                        </h1>
+                        <h2><strong>On the menu this season:</strong></h2>
+                        <ul>
+                            {% for item in menu.items.all %}
+                                <li>
+                                    <a href="{% url 'menu:item_detail' pk=item.pk %}"
+                                    class="h3 description">
+                                        {{ item }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% if menu.expiration_date %}
+                            <div class="date h3 pl-4">
+                                <strong class="text-secondary">Menu expires on</strong> {{ menu.expiration_date|date:"F j, Y" }}
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
+
+                    <div class="">
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-outline-success mr-1" href="{% url 'menu:menu_edit' pk=menu.pk %}">
+                                Edit
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

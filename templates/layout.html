@@ -18,12 +18,21 @@
         <!-- Header --->
         <div class="page-header d-flex justify-content-between">
             <div class="text-left ml-5 pl-5">
-                <h1><a href="/" class="display-3 ml-5 pl-5">Soda Fountain</a></h1>
+                <h1><a href="/" class="display-3 ml-5 pl-5 head-title">Soda Fountain</a></h1>
             </div>
             <div class="text-right">
+
+                <!-- Navigation for menus and items -->
                 <h1>
                 {% if user.is_authenticated %}
-                    {% block option %}{% endblock %}
+                    <div class="mr-5 pr-5">
+                        <a href="{% url 'menu:menu_list' %}" class="display-4 mr-5 pr-5">
+                            Menus
+                        </a>
+                        <a href="{% url 'menu:item_list' %}" class="display-4 mr-5 pr-5">
+                            Items
+                        </a>
+                    </div>
                 {% endif %}
                 </h1>
             </div>
@@ -35,5 +44,23 @@
             {% block content %}{% endblock %}
         </div>
         <!-- /Content --->
+
+        <button class="btn btn-outline-secondary" onclick="topFunction()" id="myBtn">Back to top</button>
+        <script>
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 1000) {
+                    document.getElementById("myBtn").style.display = "block";
+                } else {
+                    document.getElementById("myBtn").style.display = "none";
+                }
+            }
+
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
     </body>
 </html>

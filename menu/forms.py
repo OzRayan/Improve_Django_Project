@@ -1,23 +1,24 @@
 from django.forms import DateField, ModelForm, ValidationError
 from django.forms.extras.widgets import SelectDateWidget
-from django.utils import timezone
-import datetime
 
-from .models import Menu, Item, Ingredient
+from .models import Menu, Item
+
+import datetime
 
 
 class MenuForm(ModelForm):
     year = datetime.datetime.today().year
     year_range = tuple([i for i in range(year, year + 3)])
     expiration_date = DateField(
-        required=False, widget=SelectDateWidget(years=year_range))
+        required=False, widget=SelectDateWidget(years=year_range)
+    )
 
     class Meta:
         model = Menu
         exclude = ('created_date',)
 
     def clean(self):
-        cleaned_data = super(MenuForm, self).clean()
+        cleaned_data = super().clean()
         items = cleaned_data.get('items')
         expiration_date = cleaned_data.get('expiration_date')
 

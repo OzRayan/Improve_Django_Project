@@ -4,7 +4,23 @@ body {
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
-    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-family: Comic Sans MT, Comic Sans, cursive;
+    font-size: 1rem;
+    letter-spacing: 0.0rem;
+    font-weight: bold;
+}
+
+a {
+    color: #536878;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #314656;
+}
+
+.description {
+    color: #013220;
 }
 
 /* HEADER */
@@ -12,18 +28,61 @@ body {
     border-bottom: 0;
 }
 
-/* BUTTONS */
-.btn {
-    font-size: 1.4em;
-    border-radius: 10px;
+.head-title {
+    color: #2E2D88;
 }
 
-.in input, .in select {
+/* BUTTONS */
+.btn {
+    font-size: 1.5em;
+    border-radius: 10px;
+    outline: none;
+}
+
+.in input, .in select, textarea {
     background-color: transparent;
     border-radius: 5px;
     border-width: 1px;
+    max-width: 90%;
+}
+
+textarea {
+    min-width: 80%;
 }
 
 .in select:checked {
     background-color: green!important;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 45%;
+  z-index: 99;
+  font-size: 20px;
+  border: 1px solid #3B2F2F;
+  background-color: rgba(250, 236, 190, 0.3);
+  outline: none;
+  color: #3B2F2F;
+  padding: 1px;
+  cursor: pointer;
+  border-radius: 10px;
+  max-height: 36px;
+  max-width: 13rem;
+}
+
+#myBtn:hover {
+  background-color: #3B2F2F;
+  color: #FFE4C4;
+}
+
+
+/* LIST */
+ul {
+    list-style: decimal;
+}
+
+.menu-title {
+    color: #36454F;
 }

@@ -14,7 +14,7 @@ class Menu(models.Model):
 
 
 class Item(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=180)
     description = models.TextField()
     chef = models.ForeignKey('auth.User')
     created_date = models.DateTimeField(default=timezone.now)
@@ -27,7 +27,7 @@ class Item(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=180)
 
     def __str__(self):
         return self.name

@@ -2,19 +2,20 @@
 
 {% block title %} Items | {{ block.super }}{% endblock %}
 
-{% block option %}
-<div class="mr-5 pr-5">
-	<a href="{% url 'menu:item_new' %}" class="display-5 mr-5 pr-5">
-    	Add Item
-	</a>
-	<a href="{% url 'menu:menu_list' %}" class="display-4 mr-5 pr-5">Menus</a>
-</div>
-{% endblock %}
-
 {% block content %}
         <div class="content container">
             <div class="row">
                 <div class="col-md-12">
+
+					<!-- Info and new item -->
+					<div class="d-flex justify-content-between display-3">
+						<p class="mr-5 mt-2 menu-title">
+                        	Items
+                    	</p>
+						<a href="{% url 'menu:item_new' %}" class="h1 mr-5 pr-5 text-info">
+    						Add Item
+						</a>
+					</div>
 					{% for item in items %}
 						<div class="d-flex justify-content-between">
 							<div class="col-md-10">

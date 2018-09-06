@@ -4,21 +4,29 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="post">
-                {% if user.is_authenticated %}
-                    <a class="btn btn-default" href="{% url 'menu:item_edit' pk=item.pk %}">
-                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                        Edit
-                    </a>
-                {% endif %}
-                <h1>{{ item.name }}</h1>
-                <p><strong>Head Chef:</strong> {{ item.chef }}</p>
-                <p>{{ item.description|linebreaks }}</p>
-                <p><strong>Ingredients: </strong>{{ item.ingredients.all|join:", " }}</p>
-                {% if item.standard %}
-                    <p><em>This item is available year-round.</em></p>
-                {% endif %}
+
+                <div class="d-flex justify-content-between">
+
+                    <div class="">
+                        <h1 class="display-4 text-success">{{ item.name }}</h1>
+                        <h2><strong>Head Chef:</strong> {{ item.chef }}</h2>
+                        <h3 class="description">{{ item.description|linebreaks }}</h3>
+                        <p class="h3 description"><strong>Ingredients: </strong>{{ item.ingredients.all|join:", " }}</p>
+                        {% if item.standard %}
+                            <p class="text-secondary h4"><em>This item is available year-round.</em></p>
+                        {% endif %}
+                    </div>
+                    <div class="">
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-outline-success mr-1" href="{% url 'menu:item_edit' pk=item.pk %}">
+                                Edit
+                            </a>
+                        {% endif %}
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

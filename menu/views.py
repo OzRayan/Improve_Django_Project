@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
+
+from .models import Menu, Item
+from .forms import MenuForm, ItemForm
+
 from operator import attrgetter
 import datetime
-
-from .models import Menu, Item, timezone
-from .forms import *
 
 
 def menu_list(request):
@@ -26,7 +27,8 @@ def menu_list(request):
     # Sorts menus_no_expdate by season
     menus_no_expdate = sorted(menus_no_expdate, key=attrgetter('season'))
     return render(request, 'menu/list_all_current_menus.html',
-                  {'menus': menus, 'no_date': menus_no_expdate})
+                  {'menus': menus,
+                   'no_date': menus_no_expdate})
 
 
 def menu_detail(request, pk):
@@ -120,12 +122,13 @@ def edit_item(request, pk):
     :return: - edit_item.html + form for item
     """
     item = get_object_or_404(Item, pk=pk)
-    form = ItemForm(instance=item)
     if request.method == "POST":
         form = ItemForm(request.POST, instance=item)
         if form.is_valid():
             item_data = form.save()
             return redirect('menu:item_detail', pk=item_data.pk)
+    else:
+        form = ItemForm(instance=item)
     return render(request, 'menu/edit_item.html', {'form': form, 'key': True})
 
 

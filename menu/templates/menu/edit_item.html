@@ -6,10 +6,12 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <!-- TO DO: Add or change menu Title and head --->
-            <h1>{% if key %}Edit{% else %}Add New{% endif %} Item</h1>
-            <form method="POST" class="menu-form in">
+            <h1 class="{% if key %}text-success{% else %}text-info{% endif %}">
+                {% if key %}Edit{% else %}Add New{% endif %} Item
+            </h1>
+            <form method="POST" class="menu-form h3 in">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="save btn btn-outline-info">Save</button>

@@ -1,25 +1,26 @@
 {% extends "layout.html" %}
 
-{% block option %}
-<div class="mr-5 pr-5">
-    <a href="{% url 'menu:menu_new' %}" class="display-5 mr-5 pr-5">
-        Add Menu
-    </a>
-    <a href="{% url 'menu:item_list' %}" class="display-4 mr-5 pr-5">Items</a>
-</div>
-{% endblock %}
-
 {% block content %}
     <div class="row">
         <div class="col-md-12">
             <div class="post">
+
+                <!-- Info and New menu -->
+                <div class="d-flex justify-content-between display-3">
+                        <p class="mr-5 mt-2 menu-title">
+                            Menus
+                        </p>
+                        <a href="{% url 'menu:menu_new' %}" class="h1 ml-5 pl-5 text-info">
+                            Add Menu
+                        </a>
+                </div>
 
                 <!-- Menu List WITH expiration date --->
                 {% for menu in menus %}
                     <div class="d-flex justify-content-between">
                         <div class="">
                             <a href="{% url 'menu:menu_detail' pk=menu.pk %}" class="display-4">{{ menu.season }}</a>
-                            <p class="h3 pl-4">{{ menu.items.all|join:", " }}</p>
+                            <p class="h3 pl-4 description">{{ menu.items.all|join:", " }}</p>
                             {% if menu.expiration_date %}
                                 <div class="date h3 pl-4">
                                     <strong class="text-secondary">Expires on:</strong> {{ menu.expiration_date }}
@@ -40,7 +41,6 @@
                         </div>
                     </div>
                 {% endfor %}
-                    </div>
 
                 <!-- Menu List WITHOUT expiration date --->
                 <h1 class="display-4">Without expiration date</h1>
