@@ -54,8 +54,9 @@ class MenuTest(BaseTest):
 
     def test_menu_list_view(self):
         resp = self.client.get('/')
-        self.assertEqual(resp.status_code,200)
+        self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'menu/list_all_current_menus.html')
+        # noinspection PyUnresolvedReferences
         self.assertEqual(len(Menu.objects.all()), 2)
 
     def test_menu_detail_view(self):
@@ -79,6 +80,7 @@ class MenuTest(BaseTest):
             'expiration_date': datetime.date.today()
         }
         resp_2 = client.post('/menu/new/', data)
+        # noinspection PyUnresolvedReferences
         menu = Menu.objects.all().order_by('-id')[0]
         self.assertEqual(resp_2.status_code, 302)
         self.assertRedirects(resp_2, reverse('menu:menu_detail',
@@ -97,6 +99,7 @@ class MenuTest(BaseTest):
             'items': [self.item_2.pk],
             'expiration_date': datetime.date.today()
         }
+        # noinspection PyUnresolvedReferences
         menu = Menu.objects.all().order_by('-id')[0]
         resp_2 = client.post(reverse('menu:menu_edit',
                                      kwargs={'pk': menu.id}), data)
@@ -111,5 +114,64 @@ class MenuTest(BaseTest):
         client = Client()
         resp_2 = client.post(reverse('menu:menu_delete',
                                      kwargs={'pk': self.menu_1.id}))
+        # noinspection PyUnresolvedReferences
         self.assertEqual(len(Menu.objects.all()), 1)
         self.assertRedirects(resp_2, reverse('menu:menu_list'))
+
+
+class ItemTest(BaseTest):
+    def test_item_list_view(self):
+        resp = self.client.get('/menu/items/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'menu/item_list.html')
+        # noinspection PyUnresolvedReferences
+        self.assertEqual(len(Item.objects.all()), 2)
+
+    def test_item_detail_view(self):
+        resp = self.client.get(reverse('menu:item_detail',
+                                       kwargs={'pk': self.item_1.id}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'menu/detail_item.html')
+        self.assertContains(resp, self.ingredient_1.name)
+        self.assertContains(resp, self.item_1.name)
+
+    def test_create_new_item_view(self):
+        resp = self.client.get(reverse('menu:item_new'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'menu/edit_item.html')
+
+    def test_edit_item_view(self):
+        resp = self.client.get(reverse('menu:item_edit',
+                                       kwargs={'pk': self.item_1.id}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'menu/edit_item.html')
+
+        # With form
+        client = Client()
+        data = {
+            'name': 'Soup',
+            'description': 'Chiken soup',
+            'chef': self.user.id,
+            'ingredients': [self.ingredient_1.pk],
+            'standard': True
+        }
+        # noinspection PyUnresolvedReferences
+        item = Item.objects.get(pk=self.item_1.id)
+        resp_2 = client.post(reverse('menu:item_edit',
+                                     kwargs={'pk': item.id}), data)
+        self.assertRedirects(resp_2, reverse('menu:item_detail',
+                                             kwargs={'pk': item.id}))
+
+    def test_delete_item_view(self):
+        resp = self.client.get(reverse('menu:item_delete',
+                                       kwargs={'pk': self.item_1.id}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'menu/delete_item.html')
+
+        client = Client()
+        resp_2 = client.post(reverse('menu:item_delete',
+                                     kwargs={'pk': self.item_1.id}))
+        # noinspection PyUnresolvedReferences
+        self.assertEqual(len(Item.objects.all()), 1)
+        self.assertEqual(resp_2.status_code, 302)
+        self.assertRedirects(resp_2, '/menu/items/')

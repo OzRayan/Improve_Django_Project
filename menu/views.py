@@ -22,7 +22,7 @@ def menu_list(request):
         else:
             menus_no_expdate.append(menu)
     # Sorts menus by expiration date
-    menus = sorted(menus, key=attrgetter('expiration_date'))
+    menus = sorted(menus, key=attrgetter('created_date'))[::-1]
     # Sorts menus_no_expdate by season
     menus_no_expdate = sorted(menus_no_expdate, key=attrgetter('season'))
     return render(request, 'menu/list_all_current_menus.html',

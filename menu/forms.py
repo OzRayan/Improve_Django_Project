@@ -7,6 +7,11 @@ from .models import Menu, Item, Ingredient
 
 
 class MenuForm(ModelForm):
+    year = datetime.datetime.today().year
+    year_range = tuple([i for i in range(year, year + 3)])
+    expiration_date = DateField(
+        required=False, widget=SelectDateWidget(years=year_range))
+
     class Meta:
         model = Menu
         exclude = ('created_date',)
