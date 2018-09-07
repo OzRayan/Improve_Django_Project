@@ -1,5 +1,4 @@
 # Improve_Django_Project
-Treehouse Project 9
 
 * Over 500 fictional menus.
 * Around 1000 fictional items which can be added to menus.
