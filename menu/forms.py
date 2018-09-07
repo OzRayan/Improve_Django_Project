@@ -7,6 +7,10 @@ import datetime
 
 
 class MenuForm(ModelForm):
+    """MenuForm class
+    Inherit: - ModelForm
+    field: - expiration_date: - DateField with SelectDateWidget and range of years for selection
+    """
     year = datetime.datetime.today().year
     year_range = tuple([i for i in range(year, year + 3)])
     expiration_date = DateField(
@@ -18,6 +22,11 @@ class MenuForm(ModelForm):
         exclude = ('created_date',)
 
     def clean(self):
+        """clean method, overrides the super class clean() method.
+        - Makes sure expiration date is not passed if there is one.
+        - Makes sure that at least 1 item is selected.
+        -:return: - cleaned_data
+        """
         cleaned_data = super().clean()
         items = cleaned_data.get('items')
         expiration_date = cleaned_data.get('expiration_date')
@@ -35,12 +44,20 @@ class MenuForm(ModelForm):
 
 
 class ItemForm(ModelForm):
+    """ItemForm class
+    Inherit: - ModelForm
+    """
 
     class Meta:
         model = Item
         exclude = ('created_date',)
 
     def clean(self):
+        """clean method, overrides the super class clean() method.
+        - Makes sure that description has at least 10 characters in it.
+        - Makes sure that at least 2 ingredients is selected.
+        -:return: - cleaned_data
+        """
         cleaned_data = super().clean()
         description = cleaned_data.get('description')
         ingredients = cleaned_data.get('ingredients')

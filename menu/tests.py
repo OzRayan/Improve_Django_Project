@@ -8,6 +8,10 @@ import datetime
 
 
 class BaseTest(TestCase):
+    """Base testcase class from which other test will inherit.
+    - setUp(): - prepares data for testing purposes.
+               - create User, Menu, Item and Ingredient object for testing.
+    """
 
     def setUp(self):
         self.user = User.objects.create_user(
@@ -51,8 +55,17 @@ class BaseTest(TestCase):
 
 
 class MenuTest(BaseTest):
+    """MenuTest test class
+    Inherit: - BaseTest
+    - 5 tests are created for all views testing.
+    """
 
     def test_menu_list_view(self):
+        """Menu list test
+        1. status_code test
+        2. template used test
+        3. menu list length test
+        """
         resp = self.client.get('/')
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'menu/list_all_current_menus.html')
@@ -60,6 +73,12 @@ class MenuTest(BaseTest):
         self.assertEqual(len(Menu.objects.all()), 2)
 
     def test_menu_detail_view(self):
+        """Menu detail test
+        1. status_code test
+        2. template used test
+        3. menu item name test
+        4. menu season test
+        """
         resp = self.client.get(reverse('menu:menu_detail',
                                kwargs={'pk': self.menu_1.pk}))
         self.assertEqual(resp.status_code, 200)
@@ -68,6 +87,11 @@ class MenuTest(BaseTest):
         self.assertContains(resp, self.menu_1.season)
 
     def test_create_new_menu_view(self):
+        """New menu test
+        1. status_code test
+        2. template used test
+        3. redirects test
+        """
         resp = self.client.get(reverse('menu:menu_new'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'menu/add_menu.html')
@@ -86,6 +110,10 @@ class MenuTest(BaseTest):
                                              kwargs={'pk': menu.id}))
 
     def test_edit_menu_view(self):
+        """Edit menu test
+        1. status_code test
+        2. template used test
+        """
         resp = self.client.get(reverse('menu:menu_edit',
                                        kwargs={'pk': self.menu_1.id}))
         self.assertEqual(resp.status_code, 200)
@@ -104,6 +132,12 @@ class MenuTest(BaseTest):
         self.assertEqual(resp_2.status_code, 302)
 
     def test_delete_menu_view(self):
+        """Delete menu test
+        1. status_code test
+        2. template used test
+        3. menu list length test after menu deletion
+        4. redirects test
+        """
         resp = self.client.get(reverse('menu:menu_delete',
                                        kwargs={'pk': self.menu_1.id}))
         self.assertEqual(resp.status_code, 200)
@@ -117,8 +151,16 @@ class MenuTest(BaseTest):
 
 
 class ItemTest(BaseTest):
-
+    """ItemTest test class
+    Inherit: - BaseTest
+    - 5 tests are created for all views testing.
+    """
     def test_item_list_view(self):
+        """Item list test
+        1. status_code test
+        2. template used test
+        3. item list length test
+        """
         resp = self.client.get('/menu/items/')
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'menu/item_list.html')
@@ -126,6 +168,12 @@ class ItemTest(BaseTest):
         self.assertEqual(len(Item.objects.all()), 2)
 
     def test_item_detail_view(self):
+        """Item detail test
+        1. status_code test
+        2. template used test
+        3. item ingredient name test
+        4. item name test
+        """
         resp = self.client.get(reverse('menu:item_detail',
                                        kwargs={'pk': self.item_1.id}))
         self.assertEqual(resp.status_code, 200)
@@ -134,6 +182,10 @@ class ItemTest(BaseTest):
         self.assertContains(resp, self.item_1.name)
 
     def test_create_new_item_view(self):
+        """New item test
+        1. status_code test
+        2. template used test
+        """
         resp = self.client.get(reverse('menu:item_new'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'menu/edit_item.html')
@@ -149,6 +201,10 @@ class ItemTest(BaseTest):
         self.assertEqual(resp_2.status_code, 200)
 
     def test_edit_item_view(self):
+        """Edit item test
+        1. status_code test
+        2. template used test
+        """
         resp = self.client.get(reverse('menu:item_edit',
                                        kwargs={'pk': self.item_1.id}))
         self.assertEqual(resp.status_code, 200)
@@ -170,6 +226,12 @@ class ItemTest(BaseTest):
         self.assertEqual(resp_2.status_code, 200)
 
     def test_delete_item_view(self):
+        """Delete item test
+        1. status_code test
+        2. template used test
+        3. item list length test after menu deletion
+        4. redirects test
+        """
         resp = self.client.get(reverse('menu:item_delete',
                                        kwargs={'pk': self.item_1.id}))
         self.assertEqual(resp.status_code, 200)
