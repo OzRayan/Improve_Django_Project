@@ -142,7 +142,7 @@ class ItemTest(BaseTest):
             'name': 'Soup',
             'description': 'Tomato soup',
             'chef': self.user,
-            'ingredients': [self.ingredient_1.id],
+            'ingredients': [self.ingredient_1.id, self.ingredient_2.id],
             'standard': True
         }
         resp_2 = self.client.post('/menu/item/new/', data)
@@ -159,13 +159,14 @@ class ItemTest(BaseTest):
             'name': 'Soup',
             'description': 'Chiken soup',
             'chef': self.user,
-            'ingredients': [self.ingredient_1.id],
+            'ingredients': [self.ingredient_1.id, self.ingredient_2.id],
             'standard': True
         }
+
+        resp_2 = self.client.post(reverse('menu:item_edit',
+                                  kwargs={'pk': self.item_1.id}), data)
         # noinspection PyUnresolvedReferences
         item = Item.objects.all().order_by('-id')[0]
-        resp_2 = self.client.post(reverse('menu:item_edit',
-                                  kwargs={'pk': item.id}), data)
         self.assertEqual(resp_2.status_code, 200)
 
     def test_delete_item_view(self):

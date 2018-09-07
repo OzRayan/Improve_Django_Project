@@ -24,7 +24,6 @@
 
                 <!-- Navigation for menus and items -->
                 <h1>
-                {% if user.is_authenticated %}
                     <div class="mr-5 pr-5">
                         <a href="{% url 'menu:menu_list' %}" class="display-4 mr-5 pr-5">
                             Menus
@@ -33,7 +32,6 @@
                             Items
                         </a>
                     </div>
-                {% endif %}
                 </h1>
             </div>
         </div>

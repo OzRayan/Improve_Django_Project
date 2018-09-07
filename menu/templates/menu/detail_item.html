@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-between">
 
                     <div class="">
-                        <h1 class="display-4 text-success">{{ item.name }}</h1>
+                        <h1 class="display-4 {% if not user.authenticated %}text-info{% else %}text-success{% endif %}">{{ item.name }}</h1>
                         <h2><strong>Head Chef:</strong> {{ item.chef }}</h2>
                         <h3 class="description">{{ item.description|linebreaks }}</h3>
                         <p class="h3 description"><strong>Ingredients: </strong>{{ item.ingredients.all|join:", " }}</p>

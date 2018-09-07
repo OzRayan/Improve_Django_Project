@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <!-- TO DO: Add or change menu Title and head --->
             <h1 class="{% if key %}text-success{% else %}text-info{% endif %}">
-                {% if key %}Edit{% else %}Add New{% endif %} Item
+                {% if key %}Edit{% else %}Add{% endif %} Item
             </h1>
             <form method="POST" class="menu-form h3 in">
                 {% csrf_token %}
