@@ -3,7 +3,7 @@ Treehouse Project 9
 
 * Over 500 fictional menus.
 * Around 1000 fictional items which can be added to menus.
-* Over 5000 fictional ingradients which can be added to items.
+* Over 5000 fictional ingredients which can be added to items.
 * Menus are displayed by expiration date. Menus can be saved without expiration date.
 * Query sets are minimized.
 * As superuser, you can add, edit, delete menus or items.
