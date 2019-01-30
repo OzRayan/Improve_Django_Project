@@ -14,8 +14,9 @@ def menu_list(request):
     """
     # noinspection PyUnresolvedReferences
     all_menus = Menu.objects.all().prefetch_related('items')
-    menus_no_expdate = []
-    menus = []
+    menus_no_expdate = []  # all_menus.exclude(expiration_date__gt=datetime.date.today())
+
+    menus = []  # all_menus.filter(expiration_date__gt=datetime.date.today())
     for menu in all_menus:
         if menu.expiration_date:
             if menu.expiration_date > datetime.date.today():
