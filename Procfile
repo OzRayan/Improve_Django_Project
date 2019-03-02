@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath restaurant-menu-p9 mysite.wsgi --log-file -
+web: gunicorn --pythonpath P9_Improve_Django_Project mysite.wsgi --log-file -
