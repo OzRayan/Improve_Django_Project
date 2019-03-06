@@ -1,1 +1,1 @@
-web: waitress --pythonpath restaurant-menu-p9 mysite.wsgi --log-file -
+web: gunicorn --pythonpath restaurant-menu-p9 mysite.wsgi --log-file -

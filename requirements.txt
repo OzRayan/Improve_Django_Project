@@ -2,7 +2,9 @@ certifi==2018.4.16
 coverage==4.0.3
 Django==1.11.18
 django-debug-toolbar==1.9.1
+gunicorn==19.9.0
 pipenv==2018.7.1
+psycopg2==2.7.7
 pytz==2018.9
 selenium==2.53.1
 sqlparse==0.2.1
