@@ -30,7 +30,7 @@ class Item(models.Model):
             - standard: - BooleanField
             - ingredients: - ManyToManyField
     """
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=180)
     description = models.TextField()
     chef = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
@@ -48,7 +48,7 @@ class Ingredient(models.Model):
     Inherit: - models.Model
     field: - name: - CharField
     """
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=180)
 
     def __str__(self):
         """Return name field name"""
