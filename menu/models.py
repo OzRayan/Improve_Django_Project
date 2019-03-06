@@ -10,7 +10,7 @@ class Menu(models.Model):
             -created_date: DateTimeField
             -expiration_date: DateField
     """
-    season = models.CharField(max_length=20)
+    season = models.CharField(max_length=255)
     items = models.ManyToManyField('Item', related_name='items')
     created_date = models.DateTimeField(default=timezone.now)
     expiration_date = models.DateField(help_text='MM/DD/YYYY',
