@@ -10,4 +10,3 @@ selenium==2.53.1
 sqlparse==0.2.1
 virtualenv==16.0.0
 virtualenv-clone==0.3.0
-waitress==1.2.1
