@@ -1,1 +1,1 @@
-web: waitress --pythonpath P9_Improve_Django_Project mysite.wsgi --log-file -
+web: waitress --pythonpath restaurant-menu-p9 mysite.wsgi --log-file -
