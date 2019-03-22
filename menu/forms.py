@@ -1,5 +1,4 @@
-from django.forms import DateField, ModelForm, ValidationError
-from django.forms.extras.widgets import SelectDateWidget
+from django.forms import DateField, ModelForm, ValidationError, SelectDateWidget
 
 from .models import Menu, Item
 

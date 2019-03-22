@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.urls import path, re_path
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
+app_name = 'menu'
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('menu.urls', namespace='menu')),
+    url(r'^admin/', admin.site.urls),
+    url(r'', include(('menu.urls', 'menu'), namespace='menu')),
 ]
 
 # Setting up urlpatterns for django-debug-toolbar(version==1.9.1)
