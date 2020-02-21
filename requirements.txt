@@ -1,16 +1,17 @@
+-i https://pypi.org/simple/
 certifi==2018.4.16
 coverage==4.0.3
 dj-database-url==0.4.1
-Django==2.2.10
 django-debug-toolbar==1.9.1
+django==2.2.10
 gunicorn==19.9.0
 pipenv==2018.7.1
-psycopg2==2.7.7
 psycopg2-binary==2.7.7
+psycopg2==2.7.7
 pytz==2018.9
 selenium==2.53.1
 sqlparse==0.2.1
-virtualenv==16.0.0
 virtualenv-clone==0.3.0
-waitress==1.2.1
+virtualenv==16.0.0
+waitress==1.4.3
 whitenoise==3.2.1
