@@ -38,6 +38,7 @@ def menu_detail(request, pk):
     :return: - menu_detail.html + dictionary of menu values
     """
     menu = get_object_or_404(Menu, pk=pk)
+    # import pdb; pdb.set_trace()
     return render(request, 'menu/menu_detail.html', {'menu': menu})
 
 
